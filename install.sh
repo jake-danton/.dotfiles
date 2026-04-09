@@ -25,4 +25,4 @@ cd "$(dirname "$0")"
 
 brew bundle install --file="./brew/.Brewfile"
 
-stow */
+stow --restow --target="$HOME" */ --verbose
