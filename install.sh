@@ -37,6 +37,10 @@ if command -v fish >/dev/null 2>&1; then
   fi
 
   if [[ "${SHELL:-}" != "$fish_path" ]]; then
-    chsh -s "$fish_path" "$USER" || sudo chsh -s "$fish_path" "$USER"
+    if [[ "$(uname)" == "Linux" ]]; then
+      sudo usermod --shell "$fish_path" "$USER"
+    else
+      chsh -s "$fish_path" "$USER"
+    fi
   fi
 fi
