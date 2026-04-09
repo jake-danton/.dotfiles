@@ -26,3 +26,17 @@ cd "$(dirname "$0")"
 brew bundle install --file="./brew/.Brewfile"
 
 stow --restow --target="$HOME" */ --verbose
+
+if command -v fish >/dev/null 2>&1; then
+  fish_path="$(command -v fish)"
+
+  if [[ -w /etc/shells ]] || sudo -n test -w /etc/shells; then
+    if ! grep -qx "$fish_path" /etc/shells 2>/dev/null; then
+      printf '%s\n' "$fish_path" | sudo tee -a /etc/shells >/dev/null
+    fi
+  fi
+
+  if [[ "${SHELL:-}" != "$fish_path" ]]; then
+    chsh -s "$fish_path" "$USER" || sudo chsh -s "$fish_path" "$USER"
+  fi
+fi
