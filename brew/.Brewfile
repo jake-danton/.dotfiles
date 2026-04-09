@@ -12,7 +12,7 @@ brew "jj"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Ambitious Vim-fork focused on extensibility and agility
-brew "neovim", args: ["HEAD"]
+brew "neovim"
 # Node.js JavaScript runtime
 brew "node" if OS.mac?
 # Modern shell for the GitHub era
